@@ -1,5 +1,4 @@
 import React from 'react'
-import type { CoreStats } from '../App'
 
 type Derived = ReturnType<typeof import('../App').computeDerived>
 
