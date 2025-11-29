@@ -3,65 +3,63 @@ import StatInput from './components/StatInput'
 import DerivedStatsPanel from './components/DerivedStatsPanel'
 
 export type CoreStats = {
-  str: number
-  dex: number
-  con: number
-  int: number
-  wis: number
-  cha: number
-  level: number
+  vigor: number
+  inference: number
+  personality: number
 }
 
-const defaultStats: CoreStats = {
-  str: 10,
-  dex: 10,
-  con: 10,
-  int: 10,
-  wis: 10,
-  cha: 10,
-  level: 1
+export const defaultStats: CoreStats = {
+  vigor: 3,
+  inference: 2,
+  personality: 2
 }
 
 export function abilityModifier(score: number) {
-  return Math.floor((score - 10) / 2)
+  // Keep a simple NC to modifier mapping (if you want different rules, adjust here)
+  return Math.floor(score)
 }
 
 export function computeDerived(core: CoreStats) {
-  const mods = {
-    str: abilityModifier(core.str),
-    dex: abilityModifier(core.dex),
-    con: abilityModifier(core.con),
-    int: abilityModifier(core.int),
-    wis: abilityModifier(core.wis),
-    cha: abilityModifier(core.cha)
-  }
+  // Following collapsE rules from your request:
+  // HP = Vigor + 6
+  // Capacity = Inference + 6
+  // Initiative = Personality + 6
+  // Movement = Vigor * 2 (meters)
+  const vigor = core.vigor
+  const inference = core.inference
+  const personality = core.personality
 
-  // Example formulas — tweakable depending on system
-  const hpBase = 10
-  const hp = hpBase + mods.con * core.level
-  const ac = 10 + mods.dex
-  const initiative = mods.dex
-  const passivePerception = 10 + mods.wis
-  const attackBonus = mods.str
+  const hp = vigor + 6
+  const capacity = inference + 6
+  const initiative = personality + 6
+  const movement = vigor * 2 // meters
 
   return {
     hp,
-    ac,
+    capacity,
     initiative,
-    passivePerception,
-    attackBonus,
-    mods
+    movement,
+    vigor,
+    inference,
+    personality
   }
 }
 
 export default function App() {
   const [core, setCore] = useState<CoreStats>(defaultStats)
+  const [hpCounter, setHpCounter] = useState<number>(defaultStats.vigor + 6)
+  const [viv, setViv] = useState<number>(1) // default Viv value as a counter
 
   function update<K extends keyof CoreStats>(key: K, value: number) {
-    setCore((prev) => ({ ...prev, [key]: value }))
+    setCore((prev: CoreStats) => ({ ...prev, [key]: value }))
   }
 
   const derived = computeDerived(core)
+
+  // Keep the HP counter synced with derived hp if core changes
+  React.useEffect(() => {
+    setHpCounter(derived.hp)
+  }, [derived.hp])
 
   return (
     <div className="app">
@@ -70,12 +68,9 @@ export default function App() {
         <div className="left">
           <h2>Core Stats</h2>
           <div className="grid">
-            <StatInput label="STR" value={core.str} onChange={(v) => update('str', v)} />
-            <StatInput label="DEX" value={core.dex} onChange={(v) => update('dex', v)} />
-            <StatInput label="CON" value={core.con} onChange={(v) => update('con', v)} />
-            <StatInput label="INT" value={core.int} onChange={(v) => update('int', v)} />
-            <StatInput label="WIS" value={core.wis} onChange={(v) => update('wis', v)} />
-            <StatInput label="CHA" value={core.cha} onChange={(v) => update('cha', v)} />
+            <StatInput label="Vigor" value={core.vigor} onChange={(v) => update('vigor', v)} />
+            <StatInput label="Inference" value={core.inference} onChange={(v) => update('inference', v)} />
+            <StatInput label="Personality" value={core.personality} onChange={(v) => update('personality', v)} />
             <div className="control">
               <label>Level</label>
               <input
@@ -89,7 +84,24 @@ export default function App() {
           </div>
         </div>
         <div className="right">
-          <DerivedStatsPanel derived={derived} />
+          <DerivedStatsPanel
+            derived={derived}
+            hpCounter={hpCounter}
+            onHpChange={(v: number) => setHpCounter(v)}
+            viv={viv}
+            onVivChange={(v: number) => setViv(v)}
+          />
+          <div className="presets">
+            <button
+              onClick={() => {
+                // THE HANDBook preset — an example starting set you can tweak
+                const preset = { vigor: 3, inference: 2, personality: 2 }
+                setCore(preset)
+              }}
+            >
+              Load THE HANDBook preset
+            </button>
+          </div>
         </div>
       </div>
       <footer>

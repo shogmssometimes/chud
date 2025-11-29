@@ -7,6 +7,15 @@ cHUD is a small, independent demo app for displaying derived stats for a tableto
 - Input core ability scores (STR, DEX, CON, INT, WIS, CHA) and Level
 - Example derived stats: HP, AC, Initiative, Passive Perception, Attack Bonus
 - Easy to customize formulas in `src/App.tsx`
+ - Input collapsE core scores: Vigor, Inference, Personality
+ - Derived stats per collapsE rules:
+	 - HP = Vigor + 6
+	 - Capacity = Inference + 6
+	 - Initiative = Personality + 6
+	 - Movement = Vigor x 2 (meters)
+ - Counters for HP and Viv with +/- controls
+ - THE HANDBook preset for quickly loading a fallback statset
+ - Easy to customize formulas in `src/App.tsx`
 
 ## Quick start
 

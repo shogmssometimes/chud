@@ -30,3 +30,11 @@ body{
 .control{background:transparent;display:flex;flex-direction:column;gap:8px}
 .number-input{width:100%;padding:6px;border-radius:6px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
 footer{margin-top:12px;color:var(--muted)}
+
+.counters{margin-top:12px}
+.counter-row{display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px;margin-bottom:8px}
+.counter-controls{display:flex;align-items:center;gap:8px}
+.counter-controls button{background:var(--accent);color:white;border:none;padding:6px 8px;border-radius:6px;cursor:pointer}
+.counter-controls span{min-width:36px;text-align:center;display:inline-block}
+.presets{margin-top:8px}
+.presets button{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:6px;color:var(--text);cursor:pointer}
