@@ -43,5 +43,10 @@ Open `src/App.tsx` and tweak the `computeDerived` function to match the formulas
 - Build a compact overlay mode for in-game HUD
 - Add export/import of character stat presets
 
+### Using with collapsE — THE HANDBook
+This repository includes a small "THE HANDBook preset" button which will load a sample starting attribute profile (Vigor, Inference, Personality). It is intended to get you started quickly for `collapsE`.
+
+If you'd like, we can add actual preset sets from the Handbook or a JSON import feature so you can maintain canonical presets for your game.
+
 ## License
 MIT
