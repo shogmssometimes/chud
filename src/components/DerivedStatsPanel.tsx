@@ -24,16 +24,13 @@ export default function DerivedStatsPanel({
           <strong>HP</strong>: {derived.hp} {hpCounter !== undefined && <span className="counter">(Current: {hpCounter})</span>}
         </li>
         <li>
-          <strong>AC</strong>: {derived.ac}
+          <strong>Capacity</strong>: {derived.capacity}
         </li>
         <li>
           <strong>Initiative</strong>: {derived.initiative}
         </li>
         <li>
-          <strong>Passive Perception</strong>: {derived.passivePerception}
-        </li>
-        <li>
-          <strong>Attack Bonus</strong>: {derived.attackBonus}
+          <strong>Movement</strong>: {derived.movement} m
         </li>
       </ul>
       <div className="mods">
