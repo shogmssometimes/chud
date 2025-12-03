@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "serve": "vite preview --port 8080 --strictPort",
+    "start": "npm run build && npm run serve",
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
