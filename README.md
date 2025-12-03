@@ -17,6 +17,26 @@ cHUD is a small, independent demo app for displaying derived stats for a tableto
  - THE HANDBook preset for quickly loading a fallback statset
  - Easy to customize formulas in `src/App.tsx`
 
+## Quick start (production preview on port 8080)
+
+To build and preview a local production build on port 8080 run:
+
+```bash
+cd cHUD
+npm install
+npm run start
+```
+
+`npm run start` runs `npm run build` then `vite preview` (the app will be available at http://localhost:8080/).
+
+If you prefer running the dev server (with hot reload):
+
+```bash
+npm run dev -- --port 8080
+```
+
+Note: if you run into an error during `npm run build` related to `@vitejs/plugin-react` (ESM import issues), a temporary workaround is to remove the plugin from `vite.config.ts` — the project already disables the plugin to provide a stable production preview. If you'd like, I can attempt to re-enable the plugin and fix any ESM compatibility issues so `npm run dev` works with the fast-refresh plugin.
+
 ## Quick start
 
 1) Install dependencies:
