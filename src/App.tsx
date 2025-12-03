@@ -68,19 +68,10 @@ export default function App() {
         <div className="left">
           <h2>Core Stats</h2>
           <div className="grid">
-            <StatInput label="Vigor" value={core.vigor} onChange={(v) => update('vigor', v)} />
-            <StatInput label="Inference" value={core.inference} onChange={(v) => update('inference', v)} />
-            <StatInput label="Personality" value={core.personality} onChange={(v) => update('personality', v)} />
-            <div className="control">
-              <label>Level</label>
-              <input
-                type="number"
-                className="number-input"
-                value={core.level}
-                min={1}
-                onChange={(e) => update('level', Number(e.target.value || 1))}
-              />
-            </div>
+            <StatInput label="Vigor" value={core.vigor} onChange={(v: number) => update('vigor', v)} />
+            <StatInput label="Inference" value={core.inference} onChange={(v: number) => update('inference', v)} />
+            <StatInput label="Personality" value={core.personality} onChange={(v: number) => update('personality', v)} />
+            {/* Level removed for collapsE: core stats are Vigor, Inference, Personality */}
           </div>
         </div>
         <div className="right">
