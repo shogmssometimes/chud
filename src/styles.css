@@ -19,15 +19,6 @@ body{
 .layout{display:flex;flex-direction:column;gap:16px}
 .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.25)}
 .derived-panel-wrapper{padding:0;background:transparent;box-shadow:none}
-.core-panel{background:rgba(17,24,39,0.8)}
-.core-header{margin-bottom:12px}
-.core-header p{color:var(--muted);font-size:0.9rem;margin:4px 0 0}
-.core-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
-.core-row::-webkit-scrollbar{height:6px}
-.core-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:4px}
-.stat-input{background:rgba(255,255,255,0.03);padding:12px;border-radius:10px;min-width:140px;flex:0 0 auto;display:flex;flex-direction:column;gap:8px;border:1px solid rgba(255,255,255,0.04)}
-.stat-input label{font-weight:600;font-size:0.85rem;color:var(--muted)}
-.stat-input input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text);font-size:1rem}
 
 .derived-panel{background:rgba(17,24,39,0.95);padding:16px;border-radius:12px}
 .stat-stack{display:flex;flex-direction:column;gap:16px}
@@ -41,10 +32,12 @@ body{
 .chip span{font-size:0.8rem;color:var(--muted)}
 .chip strong{font-size:1.2rem}
 .mods h3{margin:0 0 8px;font-size:1rem}
-.mod-grid{display:flex;gap:12px;flex-wrap:wrap}
-.mod{flex:1;min-width:120px;background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:4px}
-.mod strong{font-size:0.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
-.mod span{font-size:1.2rem}
+.core-grid{display:flex;gap:12px;flex-wrap:wrap}
+.core-card{flex:1;min-width:160px;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:8px}
+.core-label{font-size:0.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+.core-controls{display:flex;align-items:center;gap:8px}
+.core-controls button{background:rgba(255,255,255,0.08);color:var(--text);border:none;padding:6px 10px;border-radius:6px;cursor:pointer}
+.core-controls input{width:56px;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text);text-align:center;font-size:1rem}
 .counter-controls{display:flex;align-items:center;gap:8px}
 .counter-controls.inline{justify-content:flex-end}
 .counter-controls button{background:var(--accent);color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer}

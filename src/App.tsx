@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import StatInput from './components/StatInput'
 import DerivedStatsPanel from './components/DerivedStatsPanel'
 
 export type CoreStats = {
@@ -72,6 +71,8 @@ export default function App() {
             onHpChange={(v: number) => setHpCounter(v)}
             viv={viv}
             onVivChange={(v: number) => setViv(v)}
+            core={core}
+            onCoreChange={update}
           />
           <div className="presets">
             <button
@@ -82,17 +83,6 @@ export default function App() {
             >
               Load THE HANDBook preset
             </button>
-          </div>
-        </section>
-        <section className="panel core-panel">
-          <div className="core-header">
-            <h2>Core Stats</h2>
-            <p>Keep these in a single row for quick reference on mobile.</p>
-          </div>
-          <div className="core-row" role="list">
-            <StatInput label="Vigor" value={core.vigor} onChange={(v: number) => update('vigor', v)} />
-            <StatInput label="Inference" value={core.inference} onChange={(v: number) => update('inference', v)} />
-            <StatInput label="Personality" value={core.personality} onChange={(v: number) => update('personality', v)} />
           </div>
         </section>
       </div>

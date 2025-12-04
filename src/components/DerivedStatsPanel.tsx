@@ -1,4 +1,5 @@
 import React from 'react'
+import type { CoreStats } from '../App'
 
 type Derived = ReturnType<typeof import('../App').computeDerived>
 
@@ -7,13 +8,17 @@ export default function DerivedStatsPanel({
   hpCounter,
   onHpChange,
   viv,
-  onVivChange
+  onVivChange,
+  core,
+  onCoreChange
 }: {
   derived: Derived
   hpCounter?: number
   onHpChange?: (v: number) => void
   viv?: number
   onVivChange?: (v: number) => void
+  core: CoreStats
+  onCoreChange: <K extends keyof CoreStats>(key: K, value: number) => void
 }) {
   const hpMax = derived.hp || 1
   const hpCurrent = hpCounter ?? derived.hp
@@ -81,20 +86,30 @@ export default function DerivedStatsPanel({
         </div>
 
         <div className="mods">
-          <h3>Ability Scores</h3>
-          <div className="mod-grid">
-            <div className="mod">
-              <strong>Vigor</strong>
-              <span>{derived.vigor}</span>
-            </div>
-            <div className="mod">
-              <strong>Inference</strong>
-              <span>{derived.inference}</span>
-            </div>
-            <div className="mod">
-              <strong>Personality</strong>
-              <span>{derived.personality}</span>
-            </div>
+          <h3>Core Stats</h3>
+          <div className="core-grid">
+            {(
+              [
+                ['vigor', 'Vigor'],
+                ['inference', 'Inference'],
+                ['personality', 'Personality']
+              ] as Array<[keyof CoreStats, string]>
+            ).map(([key, label]) => (
+              <div className="core-card" key={key}>
+                <span className="core-label">{label}</span>
+                <div className="core-controls">
+                  <button onClick={() => onCoreChange(key, Math.max(0, core[key] - 1))}>-</button>
+                  <input
+                    type="number"
+                    value={core[key]}
+                    min={0}
+                    max={30}
+                    onChange={(e) => onCoreChange(key, Number(e.target.value || 0))}
+                  />
+                  <button onClick={() => onCoreChange(key, core[key] + 1)}>+</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
