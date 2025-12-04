@@ -54,23 +54,37 @@ export default function App() {
   }
 
   const derived = computeDerived(core)
+  const hpMax = derived.hp
 
-  // Keep the HP counter synced with derived hp if core changes
+  // Clamp HP counter when max changes
   React.useEffect(() => {
-    setHpCounter(derived.hp)
-  }, [derived.hp])
+    setHpCounter((prev) => {
+      const next = Math.min(Math.max(prev, 0), hpMax)
+      return next
+    })
+  }, [hpMax])
+
+  const handleHpChange = React.useCallback(
+    (value: number) => {
+      const clamped = Math.min(Math.max(value, 0), hpMax)
+      setHpCounter(clamped)
+    },
+    [hpMax]
+  )
 
   return (
     <div className="app">
       <h1>cHUD — Compact HUD</h1>
       <div className="layout">
         <section className="panel derived-panel-wrapper">
+          {hpCounter <= 0 && <div className="warning-banner">You are Dying</div>}
           <DerivedStatsPanel
             derived={derived}
             hpCounter={hpCounter}
-            onHpChange={(v: number) => setHpCounter(v)}
+            hpMax={hpMax}
+            onHpChange={handleHpChange}
             viv={viv}
-            onVivChange={(v: number) => setViv(v)}
+            onVivChange={(v: number) => setViv(Math.max(v, 0))}
             core={core}
             onCoreChange={update}
           />

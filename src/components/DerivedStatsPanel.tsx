@@ -6,6 +6,7 @@ type Derived = ReturnType<typeof import('../App').computeDerived>
 export default function DerivedStatsPanel({
   derived,
   hpCounter,
+  hpMax,
   onHpChange,
   viv,
   onVivChange,
@@ -14,15 +15,16 @@ export default function DerivedStatsPanel({
 }: {
   derived: Derived
   hpCounter?: number
+  hpMax?: number
   onHpChange?: (v: number) => void
   viv?: number
   onVivChange?: (v: number) => void
   core: CoreStats
   onCoreChange: <K extends keyof CoreStats>(key: K, value: number) => void
 }) {
-  const hpMax = derived.hp || 1
-  const hpCurrent = hpCounter ?? derived.hp
-  const hpPercent = Math.max(0, Math.min(100, (hpCurrent / hpMax) * 100))
+  const hpCap = (hpMax ?? derived.hp) || 1
+  const hpCurrent = Math.min(hpCounter ?? derived.hp, hpCap)
+  const hpPercent = Math.max(0, Math.min(100, (hpCurrent / hpCap) * 100))
 
   const vivValue = viv ?? 0
   const vivMax = derived.capacity || Math.max(vivValue, 1)
@@ -36,7 +38,7 @@ export default function DerivedStatsPanel({
           <div className="stat-label">
             <strong>HP</strong>
             <span>
-              {hpCurrent} / {hpMax}
+              {hpCurrent} / {hpCap}
             </span>
           </div>
           <div className="stat-bar" role="img" aria-label={`HP ${hpCurrent} of ${hpMax}`}>
