@@ -37,7 +37,7 @@ body{
 .core-label{font-size:0.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
 .core-controls{display:flex;align-items:center;gap:8px}
 .core-controls button{background:rgba(255,255,255,0.08);color:var(--text);border:none;padding:6px 10px;border-radius:6px;cursor:pointer}
-.core-controls input{width:56px;padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--text);text-align:center;font-size:1rem}
+.core-controls .core-value{min-width:40px;text-align:center;font-weight:600;font-size:1rem}
 .counter-controls{display:flex;align-items:center;gap:8px}
 .counter-controls.inline{justify-content:flex-end}
 .counter-controls button{background:var(--accent);color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer}

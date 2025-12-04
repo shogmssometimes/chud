@@ -99,13 +99,7 @@ export default function DerivedStatsPanel({
                 <span className="core-label">{label}</span>
                 <div className="core-controls">
                   <button onClick={() => onCoreChange(key, Math.max(0, core[key] - 1))}>-</button>
-                  <input
-                    type="number"
-                    value={core[key]}
-                    min={0}
-                    max={30}
-                    onChange={(e) => onCoreChange(key, Number(e.target.value || 0))}
-                  />
+                  <span className="core-value">{core[key]}</span>
                   <button onClick={() => onCoreChange(key, core[key] + 1)}>+</button>
                 </div>
               </div>
