@@ -65,16 +65,7 @@ export default function App() {
     <div className="app">
       <h1>cHUD — Compact HUD</h1>
       <div className="layout">
-        <div className="left">
-          <h2>Core Stats</h2>
-          <div className="grid">
-            <StatInput label="Vigor" value={core.vigor} onChange={(v: number) => update('vigor', v)} />
-            <StatInput label="Inference" value={core.inference} onChange={(v: number) => update('inference', v)} />
-            <StatInput label="Personality" value={core.personality} onChange={(v: number) => update('personality', v)} />
-            {/* Level removed for collapsE: core stats are Vigor, Inference, Personality */}
-          </div>
-        </div>
-        <div className="right">
+        <section className="panel derived-panel-wrapper">
           <DerivedStatsPanel
             derived={derived}
             hpCounter={hpCounter}
@@ -85,7 +76,6 @@ export default function App() {
           <div className="presets">
             <button
               onClick={() => {
-                // THE HANDBook preset — an example starting set you can tweak
                 const preset = { vigor: 3, inference: 2, personality: 2 }
                 setCore(preset)
               }}
@@ -93,7 +83,18 @@ export default function App() {
               Load THE HANDBook preset
             </button>
           </div>
-        </div>
+        </section>
+        <section className="panel core-panel">
+          <div className="core-header">
+            <h2>Core Stats</h2>
+            <p>Keep these in a single row for quick reference on mobile.</p>
+          </div>
+          <div className="core-row" role="list">
+            <StatInput label="Vigor" value={core.vigor} onChange={(v: number) => update('vigor', v)} />
+            <StatInput label="Inference" value={core.inference} onChange={(v: number) => update('inference', v)} />
+            <StatInput label="Personality" value={core.personality} onChange={(v: number) => update('personality', v)} />
+          </div>
+        </section>
       </div>
       <footer>
         <small>cHUD demo — modify formulas in <code>src/App.tsx</code></small>

@@ -3,19 +3,17 @@
 cHUD is a small, independent demo app for displaying derived stats for a tabletop RPG (TTRPG). It's intentionally lightweight and intended to be used standalone or embedded into other tools.
 
 ## Features
-- Simple React + TypeScript app built with Vite
-- Input core ability scores (STR, DEX, CON, INT, WIS, CHA) and Level
-- Example derived stats: HP, AC, Initiative, Passive Perception, Attack Bonus
+- Mobile-first HUD layout (derived stats stacked above core stat row)
+- Input collapsE core scores: Vigor, Inference, Personality (one-row scroller on phones)
+- Derived stats per collapsE rules:
+	- HP = Vigor + 6 (shown as max + adjustable counter)
+	- Capacity = Inference + 6
+	- Initiative = Personality + 6
+	- Movement = Vigor x 2 (meters)
+- HP and Viv counters with +/- controls plus visual progress bars
+- Capacity/Initiative/Movement chips and ability scores row for quick reference
+- THE HANDBook preset button to load a baseline collapsE stat block
 - Easy to customize formulas in `src/App.tsx`
- - Input collapsE core scores: Vigor, Inference, Personality
- - Derived stats per collapsE rules:
-	 - HP = Vigor + 6
-	 - Capacity = Inference + 6
-	 - Initiative = Personality + 6
-	 - Movement = Vigor x 2 (meters)
- - Counters for HP and Viv with +/- controls
- - THE HANDBook preset for quickly loading a fallback statset
- - Easy to customize formulas in `src/App.tsx`
 
 ## Quick start (production preview on port 8080)
 

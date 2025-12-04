@@ -15,58 +15,87 @@ export default function DerivedStatsPanel({
   viv?: number
   onVivChange?: (v: number) => void
 }) {
+  const hpMax = derived.hp || 1
+  const hpCurrent = hpCounter ?? derived.hp
+  const hpPercent = Math.max(0, Math.min(100, (hpCurrent / hpMax) * 100))
+
+  const vivValue = viv ?? 0
+  const vivMax = derived.capacity || Math.max(vivValue, 1)
+  const vivPercent = Math.max(0, Math.min(100, (vivValue / vivMax) * 100))
+
   return (
     <div className="derived-panel">
       <h2>Derived Stats</h2>
-      <ul>
-        <li>
-          <strong>HP</strong>: {derived.hp} {hpCounter !== undefined && <span className="counter">(Current: {hpCounter})</span>}
-        </li>
-        <li>
-          <strong>Capacity</strong>: {derived.capacity}
-        </li>
-        <li>
-          <strong>Initiative</strong>: {derived.initiative}
-        </li>
-        <li>
-          <strong>Movement</strong>: {derived.movement} m
-        </li>
-      </ul>
-      <div className="mods">
-          <h3>Ability Scores</h3>
-        <div className="mod-grid">
-          {/* For collapsE, display raw scores */}
-          <div className="mod">
-            <strong>Vigor</strong>: {derived.vigor}
+      <div className="stat-stack">
+        <div className="stat-card hp-card">
+          <div className="stat-label">
+            <strong>HP</strong>
+            <span>
+              {hpCurrent} / {hpMax}
+            </span>
           </div>
-          <div className="mod">
-            <strong>Inference</strong>: {derived.inference}
+          <div className="stat-bar" role="img" aria-label={`HP ${hpCurrent} of ${hpMax}`}>
+            <div className="bar-fill" style={{ width: `${hpPercent}%` }} />
           </div>
-          <div className="mod">
-            <strong>Personality</strong>: {derived.personality}
-          </div>
-        </div>
-      </div>
-      <div className="counters">
-        <div className="counter-row">
-          <label>HP</label>
           {onHpChange && (
-            <div className="counter-controls">
-              <button onClick={() => onHpChange(hpCounter! - 1)}>-</button>
-              <span>{hpCounter}</span>
-              <button onClick={() => onHpChange(hpCounter! + 1)}>+</button>
+            <div className="counter-controls inline">
+              <button onClick={() => onHpChange(hpCurrent - 1)}>-</button>
+              <span>{hpCurrent}</span>
+              <button onClick={() => onHpChange(hpCurrent + 1)}>+</button>
             </div>
           )}
         </div>
-        <div className="counter-row">
-          <label>Viv</label>
+
+        <div className="stat-card viv-card">
+          <div className="stat-label">
+            <strong>Viv</strong>
+            <span>
+              {vivValue} / {vivMax}
+            </span>
+          </div>
+          <div className="stat-bar" role="img" aria-label={`Viv ${vivValue} of ${vivMax}`}>
+            <div className="bar-fill" style={{ width: `${vivPercent}%` }} />
+          </div>
           {onVivChange && (
-            <div className="counter-controls">
-              <button onClick={() => onVivChange((viv || 0) - 1)}>-</button>
-              <span>{viv}</span>
-              <button onClick={() => onVivChange((viv || 0) + 1)}>+</button>
+            <div className="counter-controls inline">
+              <button onClick={() => onVivChange(vivValue - 1)}>-</button>
+              <span>{vivValue}</span>
+              <button onClick={() => onVivChange(vivValue + 1)}>+</button>
             </div>
           )}
+        </div>
+
+        <div className="stat-row trio">
+          <div className="chip">
+            <span>Capacity</span>
+            <strong>{derived.capacity}</strong>
+          </div>
+          <div className="chip">
+            <span>Initiative</span>
+            <strong>{derived.initiative}</strong>
+          </div>
+          <div className="chip">
+            <span>Movement</span>
+            <strong>{derived.movement} m</strong>
+          </div>
+        </div>
+
+        <div className="mods">
+          <h3>Ability Scores</h3>
+          <div className="mod-grid">
+            <div className="mod">
+              <strong>Vigor</strong>
+              <span>{derived.vigor}</span>
+            </div>
+            <div className="mod">
+              <strong>Inference</strong>
+              <span>{derived.inference}</span>
+            </div>
+            <div className="mod">
+              <strong>Personality</strong>
+              <span>{derived.personality}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
